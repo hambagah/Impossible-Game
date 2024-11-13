@@ -25,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform wallCheck;
+    [SerializeField] Progress progression;
     Player target;
     public eBullet ebullet;
     
@@ -100,6 +101,8 @@ public class EnemyHealth : MonoBehaviour
     public void Damaged (int damage)
     {
         currHealth -= damage;
+        progression.GetComponent<Progress>().Add(2);
+        Debug.Log(currHealth);
     }
 
     private bool Wall()

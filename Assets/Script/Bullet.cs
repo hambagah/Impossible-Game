@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     
     void Start()
     {
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 10f);
     }
     void Update()
     {
@@ -22,6 +22,11 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyHealth>().Damaged(damage);
+            Destroy(gameObject);
+        }
+        if (other.gameObject.tag == "EnemyLower")
+        {
+            other.gameObject.GetComponent<EnemyAnim>().mainDamage(damage);
             Destroy(gameObject);
         }
     }

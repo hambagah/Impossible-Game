@@ -15,7 +15,7 @@ public class eBullet : MonoBehaviour
         target = GameObject.FindObjectOfType<Player>();
         moveDirection = (target.transform.position - transform.position).normalized * speed;
         rb.velocity = new Vector2 (moveDirection.x, moveDirection.y);*/
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 10f);
     }
 
     // Update is called once per frame

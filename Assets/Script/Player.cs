@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Bullet bulletPrefab;
 
     [SerializeField] Movement playerMove;
+    [SerializeField] Progress progression;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
         {
             lives--;
             invul = true;
+            progression.GetComponent<Progress>().Add(30);
         }
     }
 }
