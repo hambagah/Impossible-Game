@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     public int lives = 3;
     public float speed;
+    public float damage = 1f;
     private bool invul = false;
     private float invulTime;
     private float delay;
     public float shootTime;
+    public Animator animator;
+    public bool trueForm = false;
     
     public Transform bulletLocation;
     public Bullet bulletPrefab;
@@ -27,19 +30,31 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space) && delay > 0)
         {
-            Instantiate(bulletPrefab, bulletLocation.position, transform.rotation);
+            Bullet bullet = Instantiate(bulletPrefab, bulletLocation.position, transform.rotation);
+            bullet.GetComponent<Bullet>().SetDamage(damage);
+            if (trueForm)
+                bullet.SetTrue();
             delay = shootTime;
         }
         else 
             delay += Time.deltaTime;
 
-        if (invul) 
+        
+        if (invulTime > 2f)
+        {
+            invulTime = 0;
+            invul = false;
+            animator.SetBool("Invul", false);
+        }
+        else if (invul) 
         {
             invulTime += Time.deltaTime;
+            animator.SetBool("Invul", true);
         }
-        else if (invulTime > 3f)
+
+        if (lives <= 0)
         {
-            invul = false;
+            Die();
         }
     }
 
@@ -51,5 +66,10 @@ public class Player : MonoBehaviour
             invul = true;
             progression.GetComponent<Progress>().Add(30);
         }
+    }
+
+    public void Die()
+    {
+
     }
 }

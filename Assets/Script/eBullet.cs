@@ -8,6 +8,7 @@ public class eBullet : MonoBehaviour
     Rigidbody2D rb;
     Player target;
     private Vector2 moveDirection;
+    public bool collide = true;
 
     void Start()
     {
@@ -34,11 +35,21 @@ public class eBullet : MonoBehaviour
         speed = eBulSpeed;
     }
 
+    public void SetCollide()
+    {
+        collide = false;
+    }
+
     void OnTriggerEnter2D (Collider2D col)
     {
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().Hit();
+            Destroy(gameObject);
+        }
+
+        if (col.gameObject.tag == "Meteor" && collide)
+        {
             Destroy(gameObject);
         }
     }

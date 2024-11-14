@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 5f;
-    public int damage = 1;
+    public float damage = 1;
+    public bool collide = true;
     
     void Start()
     {
@@ -29,5 +30,25 @@ public class Bullet : MonoBehaviour
             other.gameObject.GetComponent<EnemyAnim>().mainDamage(damage);
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Meteor")
+        {
+            if (collide)
+                Destroy(gameObject);
+            else
+            {
+                other.gameObject.GetComponent<UFO>().Hit();
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public void SetDamage(float pdamage)
+    {
+        damage = pdamage;
+    }
+
+    public void SetTrue()
+    {
+        collide = false;
     }
 }

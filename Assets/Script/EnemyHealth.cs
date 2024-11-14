@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health;
-    private int currHealth;
+    public float health;
+    private float currHealth;
     public int distance;
     public int eSpeed = 5;
 
@@ -21,11 +21,14 @@ public class EnemyHealth : MonoBehaviour
     public float eSpreadSpeed = 3f;
 
     public float direction = 1f;
+    public bool trueForm = false;
+    public Animator animator;
 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform wallCheck;
     [SerializeField] Progress progression;
+    [SerializeField] Healthbar healthbar;
     Player target;
     public eBullet ebullet;
     
@@ -33,6 +36,8 @@ public class EnemyHealth : MonoBehaviour
     {
         currHealth = health;
         target = GameObject.FindObjectOfType<Player>();
+        healthbar = GetComponentInChildren<Healthbar>();
+        healthbar.UpdateHealth(currHealth, health);
     }
 
     // Update is called once per frame
@@ -86,7 +91,11 @@ public class EnemyHealth : MonoBehaviour
             eBullet bul = Instantiate(ebullet, transform.position, transform.rotation);
             bul.GetComponent<eBullet>().SetMoveDirection(bulDir);
             bul.GetComponent<eBullet>().SetSpeed(eSpreadSpeed);
-
+            if (trueForm)
+            {
+                bul.GetComponent<eBullet>().SetCollide();
+                animator.Play("Laughing", 0, 2);
+            }
             angle += angleStep;
         }
         
@@ -98,11 +107,19 @@ public class EnemyHealth : MonoBehaviour
         rb.MovePosition(rb.position + movement * (eSpeed) *  Time.fixedDeltaTime);
     }
 
-    public void Damaged (int damage)
+    public void Damaged (float damage)
     {
         currHealth -= damage;
         progression.GetComponent<Progress>().Add(2);
-        Debug.Log(currHealth);
+        healthbar.UpdateHealth(currHealth, health);
+        if (trueForm)
+            animator.Play("Hurt", 0, 2);
+    }
+
+    public void True()
+    {
+        trueForm = true;
+        animator.SetBool("True", true);
     }
 
     private bool Wall()

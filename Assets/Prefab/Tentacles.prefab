@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tentacleLocation: {fileID: 8612121718987153808}
-  tShootTime: 3
+  tShootTime: 1.5
   tDelay: 0
   eBulletSpeed: 4
   ebullet: {fileID: 1100108604253827938, guid: 3c3f31737852c8442908f69c0d2aedaa, type: 3}

@@ -35,7 +35,7 @@ public class EnemyAnim : MonoBehaviour
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
-    public void mainDamage (int damage)
+    public void mainDamage (float damage)
     {
         enemyHealth.GetComponent<EnemyHealth>().Damaged(damage);
     }

@@ -32,7 +32,7 @@ public class enemyTentacle : MonoBehaviour
     private void Attack()
     {
         Vector3 bulVector = new Vector3(target.transform.position.x, target.transform.position.y, 0f);
-        Vector2 bulDir = (bulVector - transform.position).normalized;
+        Vector2 bulDir = (bulVector - tentacleLocation.position).normalized;
         eBullet bul = Instantiate(ebullet, tentacleLocation.position, transform.rotation);
         bul.GetComponent<eBullet>().SetMoveDirection(bulDir);
         bul.GetComponent<eBullet>().SetSpeed(eBulletSpeed);
