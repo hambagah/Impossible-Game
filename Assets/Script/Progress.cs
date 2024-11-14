@@ -16,7 +16,7 @@ public class Progress : MonoBehaviour
     [SerializeField] GameObject eyes;
     [SerializeField] UFOSpawner spawner;
 
-    public static Progress instance; 
+    /*public static Progress instance; 
     
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class Progress : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
-    }
+    }*/
 
     void Start()
     {
@@ -99,6 +99,6 @@ public class Progress : MonoBehaviour
 
     public void Add(int value)
     {
-        meter += value;
+        meter = value;
     }
 }

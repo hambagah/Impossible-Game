@@ -20,28 +20,14 @@ public class Player : MonoBehaviour
     public Bullet bulletPrefab;
 
     [SerializeField] Movement playerMove;
-    [SerializeField] Progress progression;
+    [SerializeField] MeterData progression;
     [SerializeField] GameOver GameOverScreen;
-
-    public static Player instance; 
-    
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Start()
     {
         Time.timeScale = 1;
         GameOverScreen.Off();
-        progression = GameObject.FindObjectOfType<Progress>();
+        progression = GameObject.FindObjectOfType<MeterData>();
     }
 
     // Update is called once per frame
@@ -83,7 +69,7 @@ public class Player : MonoBehaviour
         {
             lives--;
             invul = true;
-            progression.GetComponent<Progress>().Add(30);
+            progression.GetComponent<MeterData>().Add(30);
         }
     }
 

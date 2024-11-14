@@ -27,32 +27,18 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform wallCheck;
-    Progress progression;
+    MeterData progression;
     [SerializeField] Healthbar healthbar;
     Player target;
     public eBullet ebullet;
     
-    public static EnemyHealth instance; 
-    
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
     void Start()
     {
         currHealth = health;
         target = GameObject.FindObjectOfType<Player>();
         healthbar = GetComponentInChildren<Healthbar>();
         healthbar.UpdateHealth(currHealth, health);
-        progression = GameObject.FindObjectOfType<Progress>();
+        progression = GameObject.FindObjectOfType<MeterData>();
     }
 
     // Update is called once per frame
@@ -125,7 +111,7 @@ public class EnemyHealth : MonoBehaviour
     public void Damaged (float damage)
     {
         currHealth -= damage;
-        progression.GetComponent<Progress>().Add(2);
+        progression.GetComponent<MeterData>().Add(2);
         healthbar.UpdateHealth(currHealth, health);
         if (trueForm)
             animator.Play("Hurt", 0, 2);
