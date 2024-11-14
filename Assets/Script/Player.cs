@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 1;
         GameOverScreen.Off();
+        progression = GameObject.FindObjectOfType<Progress>();
     }
 
     // Update is called once per frame

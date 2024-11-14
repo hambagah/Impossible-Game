@@ -16,11 +16,31 @@ public class Progress : MonoBehaviour
     [SerializeField] GameObject eyes;
     [SerializeField] UFOSpawner spawner;
 
+    public static Progress instance; 
+    
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         meter = 0;    
-        enemyHealth = enemyHealth.GetComponent<EnemyHealth>();
-        target = target.GetComponent<Player>();
+        enemyHealth = GameObject.FindObjectOfType<EnemyHealth>();
+        target = GameObject.FindObjectOfType<Player>();
+        ten1 = GameObject.Find("Tentacles1");
+        ten2 = GameObject.Find("Tentacles2");
+        ten3 = GameObject.Find("Tentacles3");
+        ten4 = GameObject.Find("Tentacles4");
+        eyes = GameObject.Find("Eyes");
+        spawner = GameObject.FindObjectOfType<UFOSpawner>();
     }
 
     void Update()

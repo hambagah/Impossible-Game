@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Retry : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Progress progress;
+    private int save;
 
-    // Update is called once per frame
-    void Update()
+    public void Restart(string stageToPlay) 
     {
-        
+        save = progress.meter;
+        SceneManager.LoadScene(stageToPlay, LoadSceneMode.Single);
+        Time.timeScale = 1;
+        progress.Add(save);
     }
 }

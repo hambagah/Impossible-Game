@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform wallCheck;
-    [SerializeField] Progress progression;
+    Progress progression;
     [SerializeField] Healthbar healthbar;
     Player target;
     public eBullet ebullet;
@@ -38,6 +38,7 @@ public class EnemyHealth : MonoBehaviour
         target = GameObject.FindObjectOfType<Player>();
         healthbar = GetComponentInChildren<Healthbar>();
         healthbar.UpdateHealth(currHealth, health);
+        progression = GameObject.FindObjectOfType<Progress>();
     }
 
     // Update is called once per frame
