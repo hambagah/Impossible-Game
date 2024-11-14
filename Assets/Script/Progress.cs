@@ -14,6 +14,7 @@ public class Progress : MonoBehaviour
     [SerializeField] GameObject ten3;
     [SerializeField] GameObject ten4;
     [SerializeField] GameObject eyes;
+    [SerializeField] UFOSpawner spawner;
 
     void Start()
     {
@@ -34,20 +35,22 @@ public class Progress : MonoBehaviour
             enemyHealth.eSpreadTime = 5;
             enemyHealth.eBulletSpeed = 4;
             enemyHealth.eSpreadSpeed = 4;
-            target.shootTime = -0.5f;
+            target.shootTime = -0.3f;
             target.damage = 2f;
+            spawner.spawnChance = 2;
+            spawner.spawnTimer = 7;
         }
 
         if (meter > 300) {
             ten1.SetActive(false); 
             ten3.SetActive(false);
             enemyHealth.bulletCount = 6;
-            target.shootTime = -0.8f;
+            target.shootTime = -0.5f;
             target.damage = 3f;
         }
 
         if (meter > 400) {
-            target.shootTime = -1f;
+            target.shootTime = -.7f;
             target.damage = 4f;
         }
 

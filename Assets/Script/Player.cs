@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -19,10 +21,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] Movement playerMove;
     [SerializeField] Progress progression;
+    [SerializeField] GameOver GameOverScreen;
 
     void Start()
     {
-        
+        Time.timeScale = 1;
+        GameOverScreen.Off();
     }
 
     // Update is called once per frame
@@ -54,7 +58,7 @@ public class Player : MonoBehaviour
 
         if (lives <= 0)
         {
-            Die();
+            GameOver();
         }
     }
 
@@ -68,8 +72,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Die()
-    {
-
+    public void GameOver() {
+        GameOverScreen.Setup();
     }
 }

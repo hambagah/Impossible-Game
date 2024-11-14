@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4751309143574584385}
   - component: {fileID: 7996777890674766861}
   - component: {fileID: 6303205096579408888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  collide: 1
 --- !u!50 &2772533195343559375
 Rigidbody2D:
   serializedVersion: 4

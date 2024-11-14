@@ -8,6 +8,7 @@ public class Stage : MonoBehaviour
     public void StartGame(string stageToPlay) 
     {
         SceneManager.LoadScene(stageToPlay, LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     public void ExitGame() {
