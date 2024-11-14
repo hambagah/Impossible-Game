@@ -32,6 +32,20 @@ public class EnemyHealth : MonoBehaviour
     Player target;
     public eBullet ebullet;
     
+    public static EnemyHealth instance; 
+    
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         currHealth = health;

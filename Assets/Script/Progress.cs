@@ -45,11 +45,6 @@ public class Progress : MonoBehaviour
 
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         if (meter > 200) {
             enemyHealth.eShootTime = 2;
             enemyHealth.eSpreadTime = 5;

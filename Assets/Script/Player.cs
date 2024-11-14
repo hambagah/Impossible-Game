@@ -23,6 +23,20 @@ public class Player : MonoBehaviour
     [SerializeField] Progress progression;
     [SerializeField] GameOver GameOverScreen;
 
+    public static Player instance; 
+    
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         Time.timeScale = 1;
