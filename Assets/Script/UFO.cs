@@ -7,8 +7,11 @@ public class UFO : MonoBehaviour
     public float uSpeed = 5;
     public float direction = 1f;
     public bool active;
+    public int type = 0;
+    public Animator animator;
     [SerializeField] GameObject detector;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] EnemyHealth enemy;
     void Start()
     {
         
@@ -19,12 +22,19 @@ public class UFO : MonoBehaviour
     {
         if (Mathf.Abs(detector.transform.position.x) > 15)
         {
-            Flip();
+            //Flip();
             if (active)
                 Check();
             else
                 Destroy();
         }
+
+        animator.SetInteger("Type", type);
+
+        if (active)
+            animator.SetBool("Active", true);
+        else 
+            animator.SetBool("Active", false);
     }
     
     private void FixedUpdate()
@@ -45,7 +55,10 @@ public class UFO : MonoBehaviour
 
     public void Check()
     {
-
+        if (type == 1)
+        {
+            enemy.Damaged(400);
+        }
     }
 
     public void Destroy()

@@ -84,11 +84,12 @@ public class Progress : MonoBehaviour
         if (meter > 600) {
             enemyHealth.True();
             target.damage = 1f;
+            enemyHealth.eSpreadTime = 2;
+            enemyHealth.eShootTime = 0.8f;
         }
 
         if (meter > 700) {
             eyes.SetActive(false);
-            enemyHealth.eSpreadSpeed = 2;
         }
 
         if (meter > 800) {
@@ -105,6 +106,7 @@ public class Progress : MonoBehaviour
         }
 
         if (meter > 1000) {
+
         }
     }
 

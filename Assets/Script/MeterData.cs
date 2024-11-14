@@ -7,7 +7,9 @@ public class MeterData : MonoBehaviour
 
     public static MeterData instance; 
     public int meter;
+    public float hp;
     Progress saved;
+    EnemyHealth boss;
     
     private void Awake()
     {
@@ -34,12 +36,22 @@ public class MeterData : MonoBehaviour
             saved = GameObject.Find("GameManager").GetComponent<Progress>();
             saved.Add(meter);
         }
+        /*if (boss == null)
+        {        
+            boss = GameObject.Find("Boss").GetComponent<EnemyHealth>();
+            boss.health = hp;
+            boss.currHealth = hp;
+        }*/
     }
 
     public void Add(int value)
     {
         meter += value;
-        Debug.Log(saved);
         saved.Add(meter);
+    }
+
+    public void Health(float bossHealth)
+    {
+        //hp = bossHealth;
     }
 }

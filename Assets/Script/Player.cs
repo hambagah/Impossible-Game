@@ -22,12 +22,15 @@ public class Player : MonoBehaviour
     [SerializeField] Movement playerMove;
     [SerializeField] MeterData progression;
     [SerializeField] GameOver GameOverScreen;
+    [SerializeField] HeartDisplay healthUI;
 
     void Start()
     {
         Time.timeScale = 1;
+        lives = 3;
         GameOverScreen.Off();
         progression = GameObject.FindObjectOfType<MeterData>();
+        healthUI.HealthUpdate(lives);
     }
 
     // Update is called once per frame
@@ -68,6 +71,7 @@ public class Player : MonoBehaviour
         if (!invul)
         {
             lives--;
+            healthUI.HealthUpdate(lives);
             invul = true;
             progression.GetComponent<MeterData>().Add(30);
         }

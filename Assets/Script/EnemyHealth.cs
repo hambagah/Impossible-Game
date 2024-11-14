@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float health;
-    private float currHealth;
+    public float currHealth;
     public int distance;
     public int eSpeed = 5;
 
@@ -18,10 +18,12 @@ public class EnemyHealth : MonoBehaviour
     public int bulletCount;
     public int endAngle;
     public int startAngle;
+    private float countdown;
     public float eSpreadSpeed = 3f;
 
     public float direction = 1f;
     public bool trueForm = false;
+    private bool dead = false;
     public Animator animator;
 
     [SerializeField] Rigidbody2D rb;
@@ -44,29 +46,35 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currHealth <= 0)
+        if (dead)
         {
-            Destroy(gameObject);
+            animator.SetBool("Dead", true);
+            countdown += Time.deltaTime;
+            if (countdown > 3f)
+            {
+                Destroy(gameObject);
+            }
         }
+        else {
+            if (Wall())
+                Flip();
 
-        if (Wall())
-            Flip();
+            if (eDelay > eShootTime)
+            {    
+                Attack();
+                eDelay = 0;
+            }
+            else
+                eDelay += Time.deltaTime;
 
-        if (eDelay > eShootTime)
-        {    
-            Attack();
-            eDelay = 0;
+            if (eDelaySpread > eSpreadTime)
+            {    
+                SpreadAttack();
+                eDelaySpread = 0;
+            }
+            else
+                eDelaySpread += Time.deltaTime;
         }
-        else
-            eDelay += Time.deltaTime;
-
-        if (eDelaySpread > eSpreadTime)
-        {    
-            SpreadAttack();
-            eDelaySpread = 0;
-        }
-        else
-            eDelaySpread += Time.deltaTime;
     }
 
     private void Attack()
@@ -112,9 +120,17 @@ public class EnemyHealth : MonoBehaviour
     {
         currHealth -= damage;
         progression.GetComponent<MeterData>().Add(2);
+        progression.GetComponent<MeterData>().Health(currHealth);
         healthbar.UpdateHealth(currHealth, health);
         if (trueForm)
             animator.Play("Hurt", 0, 2);
+        if (currHealth <= 0)    
+            Dead();
+    }
+
+    private void Dead()
+    {
+        dead = true;
     }
 
     public void True()
