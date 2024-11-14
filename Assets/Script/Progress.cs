@@ -43,7 +43,13 @@ public class Progress : MonoBehaviour
         spawner = GameObject.FindObjectOfType<UFOSpawner>();
     }
 
-    void Update()
+    public void Add(int value)
+    {
+        meter = value;
+        UpdateState();
+    }
+
+    private void UpdateState()
     {
         if (meter > 200) {
             enemyHealth.eShootTime = 2;
@@ -77,6 +83,7 @@ public class Progress : MonoBehaviour
 
         if (meter > 600) {
             enemyHealth.True();
+            target.damage = 1f;
         }
 
         if (meter > 700) {
@@ -86,6 +93,11 @@ public class Progress : MonoBehaviour
 
         if (meter > 800) {
             background2.SetActive(true);
+            target.trueForm = true;
+            spawner.ufoNum = 1;
+            spawner.spawnChance = 2;
+            spawner.speedLow = 2;
+            spawner.speedHigh = 4;
         }
 
         if (meter > 900) {
@@ -93,12 +105,8 @@ public class Progress : MonoBehaviour
         }
 
         if (meter > 1000) {
-            target.trueForm = true;
         }
     }
 
-    public void Add(int value)
-    {
-        meter = value;
-    }
+    
 }

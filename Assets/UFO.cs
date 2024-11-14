@@ -18,8 +18,13 @@ public class UFO : MonoBehaviour
     void Update()
     {
         if (Mathf.Abs(detector.transform.position.x) > 15)
+        {
             Flip();
-            //Destroy();
+            if (active)
+                Check();
+            else
+                Destroy();
+        }
     }
     
     private void FixedUpdate()
@@ -38,6 +43,11 @@ public class UFO : MonoBehaviour
         //transform.position = new Vector3(transform.position.x, Random.Range(-1.5f, 1), transform.position.z);
     }
 
+    public void Check()
+    {
+
+    }
+
     public void Destroy()
     {
         Destroy(gameObject);
@@ -50,6 +60,6 @@ public class UFO : MonoBehaviour
 
     public void Hit()
     {
-
+        active = !active;
     }
 }

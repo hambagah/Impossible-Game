@@ -6,8 +6,8 @@ public class MeterData : MonoBehaviour
 {
 
     public static MeterData instance; 
-    Progress saved;
     public int meter;
+    Progress saved;
     
     private void Awake()
     {
@@ -23,13 +23,23 @@ public class MeterData : MonoBehaviour
 
     void Start()
     {
-        saved = GameObject.FindObjectOfType<Progress>();
+        saved = GameObject.Find("GameManager").GetComponent<Progress>();
         saved.Add(meter);
+    }
+
+    void Update()
+    {
+        if (saved == null)
+        {        
+            saved = GameObject.Find("GameManager").GetComponent<Progress>();
+            saved.Add(meter);
+        }
     }
 
     public void Add(int value)
     {
         meter += value;
+        Debug.Log(saved);
         saved.Add(meter);
     }
 }
